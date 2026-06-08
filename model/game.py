@@ -1,5 +1,4 @@
 
-Von meinem iPhone gesendet
 from model.regel import (
 MindestLaengeRegel,
 ZahlRegel,
