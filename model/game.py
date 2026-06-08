@@ -1,29 +1,48 @@
-from model.regel import MindestlaengeRegel, ZahlRegel
+
+Von meinem iPhone gesendet
+from model.regel import (
+MindestLaengeRegel,
+ZahlRegel,
+GrossbuchstabeRegel,
+SonderzeichenRegel
+)
 
 
 class PasswortSpiel:
+
 def __init__(self):
 self.regeln = [
-MindestlaengeRegel(5),
-ZahlRegel()
+MindestLaengeRegel(5),
+ZahlRegel(),
+GrossbuchstabeRegel(),
+SonderzeichenRegel()
 ]
 
 def starten(self):
 
-print("Willkommen beim Passwortspiel!")
+print("=== Passwort-Spiel ===")
 
-while True:
+level = 1
+
+while level <= len(self.regeln):
+
+regel = self.regeln[level - 1]
+
+print(f"\nLevel {level}")
+print("Neue Regel:", regel.beschreibung)
 
 passwort = input("Passwort eingeben: ")
 
-alles_ok = True
+erfolgreich = True
 
-for regel in self.regeln:
+for i in range(level):
+if not self.regeln[i].pruefen(passwort):
+erfolgreich = False
+print("❌ Regel nicht erfüllt:")
+print("-", self.regeln[i].beschreibung)
 
-if not regel.pruefen(passwort):
-print("Fehler:", regel.beschreibung)
-alles_ok = False
+if erfolgreich:
+print("✅ Level geschafft!")
+level += 1
 
-if alles_ok:
-print("Passwort korrekt!")
-break
+print("\n🎉 Du hast das Spiel gewonnen!")
