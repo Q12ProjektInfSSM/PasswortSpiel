@@ -17,7 +17,7 @@ class PasswortSpiel:
         SonderzeichenRegel()
         ]
 
-    def starten(self):
+    def demo(self):
         print("=== Passwort-Spiel ===")
 
         level = 1
@@ -34,11 +34,12 @@ class PasswortSpiel:
             erfolgreich = True
 
             for i in range(level):
-                if not self.regeln[i].pruefen(passwort):
-                    erfolgreich = False
-                    print("❌ Regel nicht erfüllt:")
-                    pass
+             if not self.regeln[i].pruefen(passwort):
+                erfolgreich = False
+                print("❌ Regel nicht erfüllt:")
+
                 print("-", self.regeln[i].beschreibung)
+                pass
 
             if erfolgreich:
                 print("✅ Level geschafft!")
