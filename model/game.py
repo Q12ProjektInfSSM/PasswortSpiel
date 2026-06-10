@@ -34,15 +34,14 @@ class PasswortSpiel:
             erfolgreich = True
 
             for i in range(level):
-             if not self.regeln[i].pruefen(passwort):
-                erfolgreich = False
-                print("❌ Regel nicht erfüllt:")
+                if not self.regeln[i].pruefen(passwort):
+                    erfolgreich = False
+                    print("❌ Regel nicht erfüllt:")
+                    print("-", self.regeln[i].beschreibung)
 
-                print("-", self.regeln[i].beschreibung)
-                pass
 
             if erfolgreich:
                 print("✅ Level geschafft!")
-            level += 1
+                level += 1
 
         print("\n🎉 Du hast das Spiel gewonnen!")
