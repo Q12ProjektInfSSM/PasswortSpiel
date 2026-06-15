@@ -1,47 +1,56 @@
 
 from model.regel import (
-MindestLaengeRegel,
-ZahlRegel,
-GrossbuchstabeRegel,
-SonderzeichenRegel
+    GrossbuchstabeRegel,
+    MindestLaengeRegel,
+    SonderzeichenRegel,
+    ZahlRegel,
 )
 
 
 class PasswortSpiel:
+    """Passwort-Spiel mit schrittweiser Freischaltung der Regeln."""
 
-    def __init__(self):
-        self.regeln = [
+    alle_regeln = [
         MindestLaengeRegel(5),
         ZahlRegel(),
         GrossbuchstabeRegel(),
-        SonderzeichenRegel()
-        ]
+        SonderzeichenRegel(),
+    ]
 
-    def demo(self):
-        print("=== Passwort-Spiel ===")
+    def __init__(self):
+        self.regeln = list(PasswortSpiel.alle_regeln)
+        self.level = 1
+        self.spiel_beendet = False
 
-        level = 1
+    def reset(self):
+        self.level = 1
+        self.spiel_beendet = False
 
-        while level <= len(self.regeln):
+    def get_aktive_regeln(self):
+        return self.regeln[: min(self.level, len(self.regeln))]
 
-            regel = self.regeln[level - 1]
+    def get_regel_status(self, passwort):
+        return [regel.pruefen(passwort) for regel in self.get_aktive_regeln()]
 
-            print(f"\nLevel {level}")
-            print("Neue Regel:", regel.beschreibung)
+    def _alle_sichtbaren_regeln_erfuellt(self, passwort):
+        return all(regel.pruefen(passwort) for regel in self.get_aktive_regeln())
 
-            passwort = input("Passwort eingeben: ")
+    def analysiere_passwort(self, passwort):
+        """Prüft das Passwort und schaltet die nächste Regel frei, wenn alle sichtbaren erfüllt sind."""
+        if not self.spiel_beendet:
+            while self.level <= len(self.regeln) and self._alle_sichtbaren_regeln_erfuellt(passwort):
+                if self.level == len(self.regeln):
+                    self.level += 1
+                    self.spiel_beendet = True
+                    break
+                self.level += 1
 
-            erfolgreich = True
+        aktive_regeln = self.get_aktive_regeln()
+        regel_status = [regel.pruefen(passwort) for regel in aktive_regeln]
 
-            for i in range(level):
-                if not self.regeln[i].pruefen(passwort):
-                    erfolgreich = False
-                    print("❌ Regel nicht erfüllt:")
-                    print("-", self.regeln[i].beschreibung)
-
-
-            if erfolgreich:
-                print("✅ Level geschafft!")
-                level += 1
-
-        print("\n🎉 Du hast das Spiel gewonnen!")
+        return {
+            "aktive_regeln": aktive_regeln,
+            "regel_status": regel_status,
+            "level": self.level,
+            "gewonnen": self.spiel_beendet,
+        }
