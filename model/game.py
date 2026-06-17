@@ -3,7 +3,7 @@ from model.regel import (
     GrossbuchstabeRegel,
     MindestLaengeRegel,
     SonderzeichenRegel,
-    ZahlRegel,
+    ZahlRegel, Copyright,
 )
 
 
@@ -15,6 +15,7 @@ class PasswortSpiel:
         ZahlRegel(),
         GrossbuchstabeRegel(),
         SonderzeichenRegel(),
+        Copyright(),
     ]
 
     def __init__(self):
@@ -40,7 +41,6 @@ class PasswortSpiel:
         if not self.spiel_beendet:
             while self.level <= len(self.regeln) and self._alle_sichtbaren_regeln_erfuellt(passwort):
                 if self.level == len(self.regeln):
-                    self.level += 1
                     self.spiel_beendet = True
                     break
                 self.level += 1

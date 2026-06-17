@@ -39,3 +39,10 @@ class SonderzeichenRegel(Regel):
     def pruefen(self, passwort):
         sonderzeichen = "!@#$%^&*()-_=+[]{};:,<.>/?"
         return any(c in sonderzeichen for c in passwort)
+
+class Copyright(Regel):
+    def __init__(self):
+        super().__init__("Soll Copyright-Geschützt sein ©")
+
+    def pruefen(self, passwort):
+        return passwort[len(passwort)-1] == "©" or passwort[len(passwort)-1] == "™"

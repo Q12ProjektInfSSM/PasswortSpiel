@@ -25,22 +25,9 @@ class PasswortSpielGUI:
 
     def create_widgets(self):
         # Haupttitel
-        tk.Label(
-            self.root,
-            text="🔒 Das Passwort-Spiel",
-            font=("Arial", 16, "bold"),
-            bg="#f4f4f9",
-            fg="#333"
-        ).pack(pady=15)
-
+        tk.Label(self.root, text="🔒 Das Passwort-Spiel", font=("Arial", 16, "bold"), bg="#f4f4f9", fg="#333").pack(pady=15)
         # Level-Anzeige
-        self.level_label = tk.Label(
-            self.root,
-            text="Level 1",
-            font=("Arial", 12, "bold"),
-            bg="#f4f4f9",
-            fg="#555"
-        )
+        self.level_label = tk.Label(self.root, text="Level 1", font=("Arial", 12, "bold"), bg="#f4f4f9", fg="#555")
         self.level_label.pack(pady=5)
 
         # Label über dem Eingabefeld
