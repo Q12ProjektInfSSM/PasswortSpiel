@@ -80,3 +80,75 @@ class PalindromRegel(Regel):
                 return True
 
         return False
+
+class PiRegel(Regel):
+        def __init__(self):
+            super().__init__("Das Passwort muss Pi enthalten")
+
+        def pruefen(self, passwort):
+            return "14159" in passwort or "3.14159" in passwort
+
+class Summe30Regel(Regel):
+    def __init__(self):
+        super().__init__("Alle Ziffern im Passwort müssen summiert 100 ergeben")
+
+    def pruefen(self, passwort):
+        ziffern = [int(c) for c in passwort if c.isdigit()]
+        return sum(ziffern) == 30
+import random
+
+class HauptstadtRegel(Regel):
+    def __init__(self):
+        self.orte = {
+            "Deutschland": "Berlin",
+            "Frankreich": "Paris",
+            "Italien": "Rom",
+            "Spanien": "Madrid",
+            "Portugal": "Lissabon",
+            "Österreich": "Wien",
+            "Schweiz": "Bern",
+            "Niederlande": "Amsterdam",
+            "Belgien": "Brüssel",
+            "Dänemark": "Kopenhagen",
+            "Schweden": "Stockholm",
+            "Norwegen": "Oslo",
+            "Finnland": "Helsinki",
+            "Polen": "Warschau",
+            "Tschechien": "Prag",
+            "Ungarn": "Budapest",
+            "Griechenland": "Athen",
+            "Türkei": "Ankara",
+            "Japan": "Tokio",
+            "China": "Peking",
+            "Südkorea": "Seoul",
+            "Indien": "Neu-Delhi",
+            "Australien": "Canberra",
+            "Kanada": "Ottawa",
+            "USA": "Washington",
+            "Mexiko": "Mexiko-Stadt",
+            "Brasilien": "Brasília",
+            "Argentinien": "Buenos Aires",
+            "Ägypten": "Kairo",
+            "Südafrika": "Pretoria"
+        }
+
+
+
+        self.land, self.hauptstadt = random.choice(list(self.orte.items()))
+
+        super().__init__(
+            f"Das Passwort muss die Hauptstadt von {self.land} enthalten"
+        )
+
+    def pruefen(self, passwort):
+        return self.hauptstadt.lower() in passwort.lower()
+
+class KunstlehrerRegel(Regel):
+    def __init__(self):
+        super().__init__("Das Passwort muss den Namen eines Kunstlehrers enthalten")
+
+        self.lehrer = ["krejci", "ernst", "fritz"]
+
+    def pruefen(self, passwort):
+        passwort = passwort.lower()
+        return any(name in passwort for name in self.lehrer)

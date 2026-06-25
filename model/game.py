@@ -8,6 +8,10 @@ from model.regel import (
     GeradeLaengeRegel,
     MorseSOSRegel,
     PalindromRegel,
+    PiRegel,
+    Summe30Regel,
+    HauptstadtRegel,
+    KunstlehrerRegel,
 )
 from model.fussball_regel import FussballRegel
 
@@ -26,6 +30,10 @@ class PasswortSpiel:
         KeinERegel(),
         MorseSOSRegel(),
         PalindromRegel(),
+        PiRegel(),
+        Summe30Regel(),
+        HauptstadtRegel(),
+        KunstlehrerRegel(),
     ]
 
     def __init__(self):
