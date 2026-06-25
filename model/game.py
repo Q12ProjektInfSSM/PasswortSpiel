@@ -4,6 +4,10 @@ from model.regel import (
     SonderzeichenRegel,
     ZahlRegel,
     Copyright,
+    KeinERegel,
+    GeradeLaengeRegel,
+    MorseSOSRegel,
+    PalindromRegel,
 )
 from model.fussball_regel import FussballRegel
 
@@ -17,7 +21,11 @@ class PasswortSpiel:
         GrossbuchstabeRegel(),
         SonderzeichenRegel(),
         Copyright(),
-        FussballRegel()
+        FussballRegel(),
+        GeradeLaengeRegel(),
+        KeinERegel(),
+        MorseSOSRegel(),
+        PalindromRegel(),
     ]
 
     def __init__(self):
