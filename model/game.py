@@ -1,3 +1,4 @@
+from model import jumpnrun
 from model.jumpnrun import JumpnRunGame
 from model.regel import (
     GrossbuchstabeRegel,
@@ -26,6 +27,7 @@ class PasswortSpiel:
         MindestLaengeRegel(5),
         ZahlRegel(),
         GrossbuchstabeRegel(),
+        GameRegel(jumpnrun),
         SonderzeichenRegel(),
         Copyright(),
         FussballRegel(),

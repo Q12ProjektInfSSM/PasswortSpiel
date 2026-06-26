@@ -185,21 +185,27 @@ class EmojiRegel(Regel):
     def pruefen(self, passwort):
         emojis = "😀😂😎🔥❤️⭐🎉🍕🐱"
         return any(c in emojis for c in passwort)
+
 class GameRegel(Regel):
 
     def __init__(self, game_class):
         super().__init__("Du musst das Jump'n'Run bestehen, um das Passwort zu erhalten")
         self.game_class = game_class
         self.captcha = None
+        self.game_done = False
+
+    def starte_game(self):
+        """Startet das Jump'n'Run genau 1x und speichert den CAPTCHA."""
+        if self.captcha is None:
+            game = self.game_class()
+            code, captcha = game.start()
+            self.captcha = captcha
+            self.game_done = True
+        return self.captcha
 
     def pruefen(self, passwort):
+        """Nur noch Passwort prüfen – kein Game Start mehr!"""
+        if self.captcha is None:
+            return False
 
-        # 🎮 Spiel starten
-        game = self.game_class()
-        result = game.start()
-
-        # result = (code, captcha)
-        self.captcha = result[1]
-
-        # 🔐 Passwort muss CAPTCHA enthalten
         return self.captcha in passwort

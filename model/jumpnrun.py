@@ -37,7 +37,7 @@ class JumpnRunGame:
         platforms = []
 
         # Boden
-        platforms.append(pygame.Rect(0, 580, 300, 20))
+        platforms.append(pygame.Rect(0, 580, WORLD_WIDTH, 20))
 
         # 🧠 bessere Verteilung: näher & gleichmäßiger
         x = 200
@@ -95,7 +95,7 @@ class JumpnRunGame:
                         vel_y = 0
 
             # 💀 FALL-DEAD ZONE → Respawn
-            if player.y > 800:
+            if player.y > 650:
                 player.x = spawn_x
                 player.y = spawn_y
                 vel_y = 0
