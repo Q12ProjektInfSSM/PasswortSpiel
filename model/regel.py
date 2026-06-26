@@ -45,7 +45,7 @@ class Copyright(Regel):
         super().__init__("Soll Copyright-Geschützt sein ©")
 
     def pruefen(self, passwort):
-        return passwort[len(passwort)-1] == "©" or passwort[len(passwort)-1] == "™"
+        return passwort.endswith(("©", "™"))
 
 class GeradeLaengeRegel(Regel):
     def __init__(self):
@@ -132,3 +132,61 @@ class KunstlehrerRegel(Regel):
     def pruefen(self, passwort):
         passwort = passwort.lower()
         return any(name in passwort for name in self.lehrer)
+
+
+class ElementSummeRegel(Regel):
+    def __init__(self):
+        self.zielsumme = 180
+        super().__init__(
+            f"Die Summe der Ordnungszahlen aller chemischen Elemente muss {180} ergeben"
+        )
+
+        self.elemente = {
+            "H": 1,
+            "He": 2,
+            "Li": 3,
+            "Be": 4,
+            "B": 5,
+            "C": 6,
+            "N": 7,
+            "O": 8,
+            "F": 9,
+            "Ne": 10,
+            "Na": 11,
+            "Mg": 12,
+            "Al": 13,
+            "Si": 14,
+            "P": 15,
+            "S": 16,
+            "Cl": 17,
+            "Ar": 18,
+            "K": 19,
+            "Ca": 20,
+            "Fe": 26,
+            "Cu": 29,
+            "Ag": 47,
+            "I": 53,
+            "Au": 79,
+            "Hg": 80,
+            "Pb": 82
+        }
+
+    def pruefen(self, passwort):
+        summe = 0
+        i = 0
+
+        while i < len(passwort):
+            if i + 1 < len(passwort):
+                symbol = passwort[i:i+2]
+                if symbol in self.elemente:
+                    summe += self.elemente[symbol]
+                    i += 2
+                    continue
+
+            symbol = passwort[i]
+            if symbol in self.elemente:
+                summe += self.elemente[symbol]
+
+            i += 1
+
+        return summe == self.zielsumme

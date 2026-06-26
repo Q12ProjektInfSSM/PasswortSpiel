@@ -12,6 +12,7 @@ from model.regel import (
     Summe30Regel,
     HauptstadtRegel,
     KunstlehrerRegel,
+    ElementSummeRegel,
 )
 from model.fussball_regel import FussballRegel
 
@@ -26,14 +27,15 @@ class PasswortSpiel:
         SonderzeichenRegel(),
         Copyright(),
         FussballRegel(),
-        GeradeLaengeRegel(),
-        KeinERegel(),
         MorseSOSRegel(),
         PalindromRegel(),
         PiRegel(),
         Summe30Regel(),
         HauptstadtRegel(),
         KunstlehrerRegel(),
+        KeinERegel(),
+        GeradeLaengeRegel(),
+        ElementSummeRegel(),
     ]
 
     def __init__(self):
