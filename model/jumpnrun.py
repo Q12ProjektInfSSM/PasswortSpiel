@@ -20,25 +20,36 @@ class JumpnRunGame:
         clock = pygame.time.Clock()
         running = True
 
-        player = pygame.Rect(100, 450, 40, 40)
+        WORLD_WIDTH = 4000
+
+        # 🧍 Respawn Position
+        spawn_x = 100
+        spawn_y = 450
+
+        player = pygame.Rect(spawn_x, spawn_y, 40, 40)
 
         vel_y = 0
         gravity = 0.6
         speed = 5
         on_ground = True
 
-        # 🧱 echter Boden + Plattformen
-        platforms = [
-            pygame.Rect(0, 580, 800, 20),   # Boden
-            pygame.Rect(200, 520, 80, 20),
-            pygame.Rect(320, 480, 70, 20),
-            pygame.Rect(450, 540, 90, 20),
-            pygame.Rect(580, 500, 70, 20),
-            pygame.Rect(700, 460, 60, 20),
-        ]
+        # 🧱 Plattformen (ENGER + SPIELBARER)
+        platforms = []
+
+        # Boden
+        platforms.append(pygame.Rect(0, 580, 300, 20))
+
+        # 🧠 bessere Verteilung: näher & gleichmäßiger
+        x = 200
+        while x < WORLD_WIDTH - 200:
+            y = random.choice([520, 500, 480, 460, 520])
+            platforms.append(pygame.Rect(x, y, 120, 20))
+            x += random.randint(180, 260)
 
         captcha = None
         game_won = False
+
+        camera_x = 0
 
         while running:
             clock.tick(60)
@@ -68,28 +79,50 @@ class JumpnRunGame:
 
             on_ground = False
 
-            # 🧱 Plattform-Kollision
+            # 🧱 Kollision
             for p in platforms:
-                pygame.draw.rect(screen, (0, 0, 0), p)
-
                 if player.colliderect(p):
 
-                    # nur wenn FALLEN → landen
+                    # von oben landen
                     if vel_y > 0 and player.bottom - vel_y <= p.top:
                         player.bottom = p.top
                         vel_y = 0
                         on_ground = True
 
-                    # von unten
-                    elif vel_y < 0 and player.top < p.bottom:
+                    # von unten blockieren
+                    elif vel_y < 0:
                         player.top = p.bottom
                         vel_y = 0
 
+            # 💀 FALL-DEAD ZONE → Respawn
+            if player.y > 800:
+                player.x = spawn_x
+                player.y = spawn_y
+                vel_y = 0
+
+            # 🎥 Kamera
+            camera_x = player.x - 300
+            camera_x = max(0, min(camera_x, WORLD_WIDTH - 800))
+
+            # 🧱 Zeichnen Plattformen
+            for p in platforms:
+                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(
+                    p.x - camera_x,
+                    p.y,
+                    p.width,
+                    p.height
+                ))
+
             # 👤 Spieler
-            pygame.draw.rect(screen, (255, 0, 0), player)
+            pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(
+                player.x - camera_x,
+                player.y,
+                player.width,
+                player.height
+            ))
 
             # 🎯 Ziel
-            if player.x > 760 and not game_won:
+            if player.x > WORLD_WIDTH - 150 and not game_won:
                 game_won = True
                 captcha = self.generate_captcha()
 
@@ -106,3 +139,6 @@ class JumpnRunGame:
         return self.code, captcha
 
 
+if __name__ == "__main__":
+    game = JumpnRunGame()
+    print(game.start())
