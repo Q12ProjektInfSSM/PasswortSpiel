@@ -90,11 +90,11 @@ class PiRegel(Regel):
 
 class Summe30Regel(Regel):
     def __init__(self):
-        super().__init__("Alle Ziffern im Passwort müssen summiert 100 ergeben")
+        super().__init__("Alle Ziffern im Passwort müssen summiert 40 ergeben")
 
     def pruefen(self, passwort):
         ziffern = [int(c) for c in passwort if c.isdigit()]
-        return sum(ziffern) == 30
+        return sum(ziffern) == 40
 import random
 
 class HauptstadtRegel(Regel):

@@ -30,13 +30,3 @@ class PasswortGameController:
                 "gewonnen": result["gewonnen"],
             })
 
-
-if __name__ == "__main__":
-    # kleines Demo-Setup: Controller und View verbinden
-    from view.eingabefeld import PasswortSpielGUI
-
-    ui = PasswortSpielGUI()
-    ctrl = PasswortGameController()
-    ctrl.attach_view(ui)
-    ui.root.mainloop()
-

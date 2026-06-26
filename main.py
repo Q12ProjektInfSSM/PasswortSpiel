@@ -3,7 +3,6 @@ from view.eingabefeld import PasswortSpielGUI
 
 
 def main():
-    """Startet das Passwort-Spiel mit View und Controller."""
     gui = PasswortSpielGUI()
     controller = PasswortGameController()
     controller.attach_view(gui)
