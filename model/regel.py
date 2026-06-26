@@ -68,19 +68,6 @@ class MorseSOSRegel(Regel):
     def pruefen(self, passwort):
         return "...---..." in passwort
 
-class PalindromRegel(Regel):
-    def __init__(self):
-        super().__init__("Das Passwort muss ein Palindrom enthalten")
-
-    def pruefen(self, passwort):
-        woerter = passwort.split()
-
-        for wort in woerter:
-            if len(wort) > 1 and wort.lower() == wort.lower()[::-1]:
-                return True
-
-        return False
-
 class PiRegel(Regel):
         def __init__(self):
             super().__init__("Das Passwort muss Pi enthalten")
@@ -198,3 +185,21 @@ class EmojiRegel(Regel):
     def pruefen(self, passwort):
         emojis = "😀😂😎🔥❤️⭐🎉🍕🐱"
         return any(c in emojis for c in passwort)
+class GameRegel(Regel):
+
+    def __init__(self, game_class):
+        super().__init__("Du musst das Jump'n'Run bestehen, um das Passwort zu erhalten")
+        self.game_class = game_class
+        self.captcha = None
+
+    def pruefen(self, passwort):
+
+        # 🎮 Spiel starten
+        game = self.game_class()
+        result = game.start()
+
+        # result = (code, captcha)
+        self.captcha = result[1]
+
+        # 🔐 Passwort muss CAPTCHA enthalten
+        return self.captcha in passwort
