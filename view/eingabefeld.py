@@ -211,8 +211,7 @@ class PasswortSpielGUI:
 
         def spawn_random_error(count):
             if count > 0:
-                addr = hex(random.randint(0x00000000, 0xFFFFFFFF)).upper()
-                fake_beschr = f"Schwerer Ausnahme-Fehler 0E an {addr} in VxD VMM(01).\nDie aktuelle Anwendung wird beendet."
+                fake_beschr = f"DU GEWINNST!!!!a🥳🥳🎉🎉🪩🎊🪅"
 
                 # Nutze die bestehende Logik für ein fehlerhaftes Popup
                 err_win = tk.Toplevel(self.root)

@@ -13,6 +13,7 @@ from model.regel import (
     HauptstadtRegel,
     KunstlehrerRegel,
     ElementSummeRegel,
+    EmojiRegel
 )
 from model.fussball_regel import FussballRegel
 
@@ -36,6 +37,7 @@ class PasswortSpiel:
         KeinERegel(),
         GeradeLaengeRegel(),
         ElementSummeRegel(),
+        EmojiRegel(),
     ]
 
     def __init__(self):

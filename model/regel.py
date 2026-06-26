@@ -190,3 +190,11 @@ class ElementSummeRegel(Regel):
             i += 1
 
         return summe == self.zielsumme
+
+class EmojiRegel(Regel):
+    def __init__(self):
+        super().__init__("Das Passwort muss ein Emoji enthalten")
+
+    def pruefen(self, passwort):
+        emojis = "😀😂😎🔥❤️⭐🎉🍕🐱"
+        return any(c in emojis for c in passwort)
