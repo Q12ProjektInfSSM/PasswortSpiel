@@ -1,3 +1,4 @@
+import periodictable as pt
 class Regel:
     def __init__(self, beschreibung):
         self.beschreibung = beschreibung
@@ -138,37 +139,13 @@ class ElementSummeRegel(Regel):
     def __init__(self):
         self.zielsumme = 180
         super().__init__(
-            f"Die Summe der Ordnungszahlen aller chemischen Elemente muss {180} ergeben"
+            f"Die Summe der Ordnungszahlen aller chemischen Elemente muss {self.zielsumme} ergeben"
         )
 
         self.elemente = {
-            "H": 1,
-            "He": 2,
-            "Li": 3,
-            "Be": 4,
-            "B": 5,
-            "C": 6,
-            "N": 7,
-            "O": 8,
-            "F": 9,
-            "Ne": 10,
-            "Na": 11,
-            "Mg": 12,
-            "Al": 13,
-            "Si": 14,
-            "P": 15,
-            "S": 16,
-            "Cl": 17,
-            "Ar": 18,
-            "K": 19,
-            "Ca": 20,
-            "Fe": 26,
-            "Cu": 29,
-            "Ag": 47,
-            "I": 53,
-            "Au": 79,
-            "Hg": 80,
-            "Pb": 82
+            e.symbol: e.number
+            for e in pt.elements
+            if e.number
         }
 
     def pruefen(self, passwort):
@@ -188,13 +165,14 @@ class ElementSummeRegel(Regel):
                 summe += self.elemente[symbol]
 
             i += 1
+        self.beschreibung = f"Die Summe der Ordnungszahlen aller chemischen Elemente muss {self.zielsumme} ergeben. Aktuell: {summe}"
 
         return summe == self.zielsumme
 
-class EmojiRegel(Regel):
+class SchachfigurRegel(Regel):
     def __init__(self):
-        super().__init__("Das Passwort muss ein Emoji enthalten")
+        super().__init__("Das Passwort muss eine Schachfigur enthalten")
 
     def pruefen(self, passwort):
-        emojis = "😀😂😎🔥❤️⭐🎉🍕🐱"
-        return any(c in emojis for c in passwort)
+        schachfiguren = "♔♕♖♗♘♙♚♛♜♝♞♟"
+        return any(c in schachfiguren for c in passwort)
