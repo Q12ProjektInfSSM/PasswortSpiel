@@ -37,7 +37,7 @@ class JumpnRunGame:
         platforms = []
 
         # Boden
-        platforms.append(pygame.Rect(0, 580, WORLD_WIDTH, 20))
+        platforms.append(pygame.Rect(0, 580, 300, 20))
 
         # 🧠 bessere Verteilung: näher & gleichmäßiger
         x = 200
