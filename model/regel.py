@@ -100,40 +100,20 @@ import random
 class HauptstadtRegel(Regel):
     def __init__(self):
         self.orte = {
-            "Deutschland": "Berlin",
-            "Frankreich": "Paris",
-            "Italien": "Rom",
-            "Spanien": "Madrid",
-            "Portugal": "Lissabon",
-            "Österreich": "Wien",
-            "Schweiz": "Bern",
-            "Niederlande": "Amsterdam",
-            "Belgien": "Brüssel",
-            "Dänemark": "Kopenhagen",
-            "Schweden": "Stockholm",
-            "Norwegen": "Oslo",
-            "Finnland": "Helsinki",
-            "Polen": "Warschau",
-            "Tschechien": "Prag",
-            "Ungarn": "Budapest",
-            "Griechenland": "Athen",
-            "Türkei": "Ankara",
-            "Japan": "Tokio",
-            "China": "Peking",
-            "Südkorea": "Seoul",
-            "Indien": "Neu-Delhi",
-            "Australien": "Canberra",
-            "Kanada": "Ottawa",
-            "USA": "Washington",
-            "Mexiko": "Mexiko-Stadt",
-            "Brasilien": "Brasília",
-            "Argentinien": "Buenos Aires",
-            "Ägypten": "Kairo",
-            "Südafrika": "Pretoria"
-        }
-
-
-
+    "Frankreich": "Paris",
+    "Italien": "Rom",
+    "Spanien": "Madrid",
+    "Portugal": "Lissabon",
+    "Norwegen": "Oslo",
+    "Polen": "Warschau",
+    "Tschechien": "Prag",
+    "Türkei": "Ankara",
+    "Japan": "Tokio",
+    "Kanada": "Ottawa",
+    "USA": "Washington",
+    "Brasilien": "Brasilia",
+    "Ägypten": "Kairo"
+}
         self.land, self.hauptstadt = random.choice(list(self.orte.items()))
 
         super().__init__(
