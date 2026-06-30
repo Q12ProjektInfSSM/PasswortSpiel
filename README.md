@@ -26,3 +26,23 @@ Das Projekt ist ein Python-Projekt, der in mehrere Ordner/Module unterteilt sind
 - requests: benötigt um api-calls zu machen
 - periodictable: ermöglicht das Erstellen eines Dict mit Elementsymbol und Ordnungszahl
 
+---
+
+## Teamarbeit und Versionsverwaltung
+
+- Aufteilung der Arbeit:
+	- Sabri: (Spielidee mit Entwurf von Regeln, Spieltesten)
+	- Stefan: (Umsetzung der Regeln & Projektstruktur)
+	- Matthieu: (GUI, Projektstruktur, Regeln)
+
+Verwaltung von GitHub zum zentralen Speichern des Projekts. Eigene Änderungen werden gemacht, anschließend mit der Repo gemergt 
+
+---
+
+## Ablauf
+
+1. Spielidee finden, eigene Regeln ausdenken
+2. Architektur und Projektstruktur bestimmen
+3. Regeln implementieren + testen
+4. Spiellogik mit Regelprüfung
+5. GUI mit Contoller erstellen
